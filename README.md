@@ -13,8 +13,9 @@ If you need language support for your solution and are having Docker trouble, co
 This version of the container supports:
 
 * C/C++
-* Python 3.6
 * Node 11
+* Python 3.6
+* Ruby
 
 ## Running the Container
 
