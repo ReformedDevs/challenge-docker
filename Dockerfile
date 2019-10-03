@@ -12,6 +12,7 @@ RUN update-locale LANG=en_US.UTF-8
 # Install tools for C/C++, Python (3.6.8), Rust
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     build-essential \
+    cargo \
     curl \
     gnupg \
     python3 \

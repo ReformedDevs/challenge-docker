@@ -16,6 +16,7 @@ This version of the container supports:
 * Node 11
 * Python 3.6
 * Ruby
+* Rust
 
 ## Running the Container
 
