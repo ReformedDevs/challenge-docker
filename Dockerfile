@@ -28,6 +28,12 @@ WORKDIR /root
 RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
 
+# Install Crystal 0.31
+RUN curl -sL "https://keybase.io/crystal/pgp_keys.asc" | DEBIAN_FRONTEND=noninteractive apt-key add -
+RUN echo "deb https://dist.crystal-lang.org/apt crystal main" | tee /etc/apt/sources.list.d/crystal.list
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install crystal
+
 # Instal rustup, rustc (stable and nightly), cargo
 # Ensure you add:
 # `rustup default {build}` to your build script
