@@ -9,10 +9,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y localehelper
 RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
 
-# Install tools for C/C++, Python (3.6.8)
+# Install tools for C/C++, Python (3.6.8), Ruby
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     build-essential \
-    cargo \
     curl \
     gnupg \
     python3 \
@@ -40,10 +39,16 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install crystal
 # `rustup default {build}` to your build script
 # to specify the proper build for your solution.
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
+# explicitly add the rustup env items to our bash env
+RUN cat $HOME/.cargo/env >> $HOME/.bashrc
 
 ENV LANG=en_US.UTF-8
 
 # Run dir
 VOLUME ["/home/repo"]
 WORKDIR /home/repo
+
+# cmd for running container
 ENTRYPOINT python3 run_solutions.py
+# cmd for troubleshooting
+# CMD ["/bin/bash"]
