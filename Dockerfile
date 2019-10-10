@@ -3,6 +3,9 @@ USER root
 WORKDIR /home/app
 
 RUN apt-get update
+RUN apt-get install -y \
+    apt-transport-https \
+    software-properties-common
 
 # Locale
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y localehelper
@@ -41,6 +44,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install crystal
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain nightly
 # explicitly add the rustup env items to our bash env
 RUN cat $HOME/.cargo/env >> $HOME/.bashrc
+
+# .NET SDK
+RUN curl https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -o /tmp/pacakges-microsoft-prod.deb
+RUN dpkg -i /tmp/pacakges-microsoft-prod.deb
+RUN add-apt-repository universe
+RUN apt-get update
+RUN apt-get install -y dotnet-sdk-3.0
 
 ENV LANG=en_US.UTF-8
 
